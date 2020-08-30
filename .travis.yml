@@ -1,0 +1,33 @@
+dist: focal
+
+language: cpp
+
+compiler:
+  - clang
+  
+
+env:
+  global:
+    - LANG="en_US.UTF-8"
+#    - secure: olbok/GN6rOYvPnHBYWGz7giCoCdLFpT/7WSBHukYO3E0uNeqAUOOgW2BFOwCVWdSEJ/iTvJXZQ4qVZHX+6jRfvILZeGv+D2P93VdD8UFQRoTOfFC7esAo525s9fuKm9ehUGWZxlzGOBHHckky1jn6pEf8mlXAVM5e76dlH0fck=
+
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get -y install libssl-dev libboost-dev libmysqlclient-dev
+  - git clone -b 'v1.16.0' --depth 1 https://github.com/trojan-gfw/trojan.git
+  
+script:
+  - cd trojan
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make
+  - ctest
+  
+#after_script:
+#  - cd pdfcpu/cmd/pdfcpu
+#  - tar -czvf pdfcpu.tar.gz pdfcpu.wasm
+#  - wget http://gosspublic.alicdn.com/ossutil/1.6.14/ossutil64                           
+#  - chmod 755 ./ossutil64
+#  - ./ossutil64 -i ${AliyunAccessKey} -k ${AliyunAccessSecret} -e oss-cn-hangzhou.aliyuncs.com -f cp pdfcpu.tar.gz oss://gamelets/pub/ 
