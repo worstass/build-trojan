@@ -15,8 +15,9 @@ env:
 before_install:
   - sudo apt-get update
   - sudo apt-get -y install libssl-dev libboost-dev libmysqlclient-dev
-  - git clone -b 'v1.16.0' --depth 1 https://github.com/trojan-gfw/trojan.git
-  
+  - git clone -b 'v1.16.0' --depth 1 https://github.com/trojan-gfw/trojan.git  
+  - sudo snap install cmake --beta --classic
+
 script:
   - cd trojan
   - mkdir build
